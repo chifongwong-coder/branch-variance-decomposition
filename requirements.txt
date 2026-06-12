@@ -1,0 +1,25 @@
+# Version floors are conservative lower bounds, set only on the API-sensitive
+# packages. The code was developed and run with: numpy 1.26, scipy 1.11,
+# matplotlib 3.8, scikit-learn 1.4, POT 0.9, torch 2.5, torchvision 0.20,
+# transformers 4.45, faiss-cpu 1.8. Newer versions are expected to work; for
+# exact reproduction, pin to those.
+
+# Core numerics / plotting
+numpy>=1.23
+scipy>=1.9
+matplotlib>=3.6
+scikit-learn>=1.1          # KMeans n_init is passed explicitly (1.4 default change is moot)
+
+# Optimal transport (E3c Sinkhorn / minibatch-OT couplings)
+POT>=0.9
+
+# Neural experiments (E4, E6) and real-data proxy (E5)
+torch>=2.0                 # use_safetensors avoids the torch>=2.6 torch.load gate
+torchvision>=0.15
+transformers>=4.30         # HuggingFace CLIP image encoder (E5); needs use_safetensors support
+faiss-cpu>=1.7             # nearest-neighbour branch search (E5)
+
+# Misc runtime helpers
+threadpoolctl>=3.0
+psutil>=5.9
+Pillow>=9.0                # image composition (reflow composite)
